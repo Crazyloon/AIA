@@ -1,5 +1,5 @@
-export class Quote{
-  constructor(){}
+export class Quote {
+  constructor() {}
   // constructor(user: number, fName: string, lName: string, dob: string,
   //             addr: string, city: string, state: string, zip: string){
   //               this.userId = user;
@@ -12,9 +12,9 @@ export class Quote{
   //               this.zip = zip;
   // }
 
-  quoteId: number = 1;
+  quoteId: number;
   userId: number;
-  firstName: string= "test";
+  firstName: string;
   lastName: string;
   dateOfBirth: string;
   email: string;
@@ -40,5 +40,5 @@ export class Quote{
   previousCarrierLizard: boolean;
   previousCarrierLizardDiscount: number;
   previousCarrierPervasive: boolean;
-  previousCarrierPervasiveDiscount: number;   
+  previousCarrierPervasiveDiscount: number;
 }

@@ -6,8 +6,46 @@
     </button>
   </div>
   <div class="expanding-card-container" [class.open]="isOpen">
+
     <div class="expanding-card-body">
-      <div class="form-group">
+      <div *ngFor="let inputs of inputGroups">
+        <div *ngIf="inputs.type == 'text' || inputs.type == 'date'; else isCheckbox" class="form-group">
+          <label>{{inputs.label}}</label>
+          <input class="form-control" type="{{inputs.type}}" />
+        </div>
+        <ng-template #isCheckbox>
+          <div *ngIf="inputs.type == 'checkbox'; else isSelectList" class="form-group">
+            <label class="check-box-input">
+              {{inputs.label}}
+              <input  type="{{inputs.type}}" checked={{inputs.value}} class="form-control"/>
+              <span class="checkmark"></span>
+            </label>
+          </div>
+          <ng-template #isSelectList>
+            <div *ngIf="inputs.type == 'select'" class="form-group">
+                <label>{{inputs.label}}</label>
+                <select class="form-control">
+                  <option *ngFor="let option of previousCarrierOptions" value="{{option}}">
+                    {{option}}
+                  </option>
+                </select>
+            </div>
+          </ng-template>
+        </ng-template>
+      </div>
+    </div>
+
+    <div class="expanding-card-footer">
+      <h5>100% Complete</h5>
+      <button (click)="onToggleClicked()" type="button">
+        <img src="../../assets/icons/012-chevron-arrow-down.svg" [class.open]="isOpen" />
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="form-group">
         <label>First Name</label>
         <input  class="form-control" type="text" />
       </div>
@@ -74,13 +112,5 @@
           <input class="form-control" type="checkbox" />
           Force multi-car discount?
         </label>
-      </div>
-    </div>
-    <div class="expanding-card-footer">
-      <h5>100% Complete</h5>
-      <button (click)="onToggleClicked()" type="button">
-        <img src="../../assets/icons/012-chevron-arrow-down.svg" [class.open]="isOpen" />
-      </button>
-    </div>
-  </div>
-</div>
+      </div> 
+    </div> -->

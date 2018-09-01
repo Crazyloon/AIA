@@ -12,12 +12,12 @@ export class ExpandingCardComponent implements OnInit {
   @Input() cardBody: string;
 
   constructor() {
-   }
+  }
 
   ngOnInit() {
   }
 
-  onToggleClicked(){
+  onToggleClicked() {
     this.isOpen = !this.isOpen;
   }
 

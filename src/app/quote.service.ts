@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Quote } from '../data/models/domain/quote';
-import { Observable, of } from 'rxjs';1
+import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap, take } from 'rxjs/operators';
@@ -13,12 +13,12 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class QuoteService {
-  quotesUrl: 'api/quotes'
-  
+  quotesUrl: 'api/quotes';
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
-  ){ }
+  ) { }
 
   private log(message: string) {
     this.messageService.add(`QuoteService: ${message}`);

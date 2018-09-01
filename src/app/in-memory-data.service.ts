@@ -1,7 +1,7 @@
-import { InMemoryDbService } from "angular-in-memory-web-api";
+import { InMemoryDbService } from 'angular-in-memory-web-api';
 
 export class InMemoryDataService implements InMemoryDbService {
-  createDb(){   
+  createDb() {
     const quotes = [
         {
         quoteId: 1,
@@ -32,9 +32,10 @@ export class InMemoryDataService implements InMemoryDbService {
         previousCarrierLizard: true,
         previousCarrierLizardDiscount: -0.05,
         previousCarrierPervasive: false,
-        previousCarrierPervasiveDiscount: null,        
+        previousCarrierPervasiveDiscount: null,
       },
-    ]
-    return {quotes}
+    ];
+
+    return {quotes};
   }
 }

@@ -1,6 +1,6 @@
-import { QuoteInput } from "../domain/quoteinput";
+import { QuoteInput } from '../domain/quoteinput';
 
-export const customerForm: QuoteInput[] = [
+export const CustomerForm: QuoteInput[] = [
   {
     label: 'First Name',
     type: 'text',
@@ -59,21 +59,21 @@ export const customerForm: QuoteInput[] = [
   {
     label: 'Claims in the last 5 years?',
     type: 'checkbox',
-    value: false,
+    value: '',
   },
   {
     label: 'Any moving violations within 5 years?',
     type: 'checkbox',
-    value: false,
+    value: '',
   },
   {
     label: 'Under 3 years driving experience?',
     type: 'checkbox',
-    value: false,
+    value: '',
   },
   {
     label: 'Force multi-car discount?',
     type: 'checkbox',
-    value: false,
+    value: '',
   }
 ];
