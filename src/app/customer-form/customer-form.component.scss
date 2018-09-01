@@ -57,6 +57,7 @@
         &:focus {
           border-color: $color-trim;
           box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.25);
+          animation: pulsing_shadow 3s infinite;
         }
 
         &[type="text"], &[type="date"] {
@@ -77,6 +78,7 @@
         &:focus{
           border-color: $color-trim;
           box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.25);
+          animation: pulsing_shadow 3s infinite;
         }
         
         @media screen and (min-width: map-get($grid-breakpoints, sm)) {
@@ -128,6 +130,7 @@
           background-color: #ffffff;
           border-radius: 0.25rem;
           border: 1px solid $color-primary;
+          transition: background-color .5s ease-in-out;
         }       
 
         /* When the checkbox is checked, add a blue background */
@@ -196,4 +199,15 @@
       }
     }
   }
+}
+
+@-webkit-keyframes pulsing_shadow {
+  0% { box-shadow: 0 0 4px 0.2rem rgba(0, 11, 106, 0.25) }
+  50% { box-shadow: 0 0 10px 0.2rem rgba(0, 11, 106, 0.65) }
+  100% { box-shadow: 0 0 4px 0.2rem rgba(0, 11, 106, 0.25) }
+}
+@keyframes pulsing_shadow {
+  0% { box-shadow: 0 0 4px 0.2rem rgba(0, 11, 106, 0.25) }
+  50% { box-shadow: 0 0 10px 0.2rem rgba(0, 11, 106, 0.65) }
+  100% { box-shadow: 0 0 4px 0.2rem rgba(0, 11, 106, 0.25) }
 }
