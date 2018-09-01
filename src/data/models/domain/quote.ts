@@ -12,9 +12,9 @@ export class Quote{
   //               this.zip = zip;
   // }
 
-  quoteId: number;
+  quoteId: number = 1;
   userId: number;
-  firstName: string;
+  firstName: string= "test";
   lastName: string;
   dateOfBirth: string;
   email: string;
