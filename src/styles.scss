@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "src/_variables";
+
+body{
+  margin: 0;
+  font-family: 'Righteous', cursive;
+}
+
+a{
+  color: $color-primary;
+  text-decoration: none !important;
+  &:hover label{
+    color: $color-secondary;
+    cursor: pointer;
+  }
+}
+
+img.icon{
+  align-self: center;
+  width: 40px;
+  height: 40px;
+  &:hover{
+    padding: 5px;
+  }
+}
+
+// Beveled Buttons - Works with bootstrap 4 buttons of medium (standard) size 'btn btn-type'
+.bevel{
+  box-shadow: $btn-bevel-down;
+}
+.bevel:focus{
+  box-shadow: $btn-bevel-down !important;
+}
+.bevel-md:active:focus{
+  padding-top: 7px;
+  padding-left: 13px;
+  padding-right: 11px;
+  padding-bottom: 5px;
+  box-shadow: $btn-bevel-up !important;
+}
