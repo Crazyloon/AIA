@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "node_modules/bootstrap/scss/_variables";
 @import "src/_variables";
 
 body{
@@ -23,6 +25,26 @@ img.icon{
   &:hover{
     padding: 5px;
   }
+}
+
+
+input.form-control.is-invalid{
+
+  & ~ div.alert.alert-danger{
+    margin: 5px 0 0 0;
+    padding: 0 0 0 .75rem;
+    z-index: -1;
+    @media screen and (min-width: map-get($grid-breakpoints, sm)) {
+      max-width: 250px;
+    }
+    span{
+      display: block;
+    }
+  }
+}
+
+div.valid-feedback{
+  margin-left: 13px;
 }
 
 // Beveled Buttons - Works with bootstrap 4 buttons of medium (standard) size 'btn btn-type'
