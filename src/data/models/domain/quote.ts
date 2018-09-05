@@ -12,11 +12,11 @@ export class Quote {
   //               this.zip = zip;
   // }
 
-  quoteId: number;
+  id: number;
   userId: number;
   firstName: string;
   lastName: string;
-  dateOfBirth: string;
+  dateOfBirth: Date;
   email: string;
   phone: string;
   address: string;
@@ -27,7 +27,9 @@ export class Quote {
   price: number;
   dateQuoted: string;
   sold: boolean;
-  dateSold: string;
+  dateSold: Date;
+  discarded: boolean;
+  dateDiscarded: Date;
   previousCarrier: string;
   pastClaims: boolean;
   pastClaimsDiscount: number;

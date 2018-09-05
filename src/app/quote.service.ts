@@ -13,22 +13,51 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class QuoteService {
-  quotesUrl: 'api/quotes';
+  private quotesUrl: string;
 
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
-  ) { }
+  ) {
+    this.quotesUrl = 'api/quotes';
+   }
+
 
   private log(message: string) {
     this.messageService.add(`QuoteService: ${message}`);
   }
 
   getQuotes(): Observable<Quote[]> {
-    return this.http.get<Quote[]>(this.quotesUrl)
+    console.log('URL ' + this.quotesUrl);
+    return this.http.get<Quote[]>('api/quotes')
     .pipe(
-      tap(heroes => this.log('fetched quotes')),
+      tap(quotes => this.log('Quote Service: got quotes!')),
       catchError(this.handleError('getQuotes', []))
+    );
+  }
+
+  addQuote(quote: Quote): Observable<Quote> {
+    return this.http.post<Quote>(this.quotesUrl, quote, httpOptions).pipe(
+      tap((q: Quote) => this.log(`Quote Service: ${q.id} added!`)),
+      catchError(this.handleError<Quote>('addQuote'))
+    );
+  }
+
+  deleteQuote (quote: Quote | number): Observable<Quote> {
+    const id = typeof quote === 'number' ? quote : quote.id;
+    const url = `${this.quotesUrl}/${id}`;
+
+    return this.http.delete<Quote>(url, httpOptions).pipe(
+      tap(_ => this.log(`Quote Service: ${id} deleted!`)),
+      catchError(this.handleError<Quote>('deleteQuote'))
+    );
+  }
+
+  /** PUT: update the quote on the server */
+  updateQuote (quote: Quote): Observable<any> {
+    return this.http.put(this.quotesUrl, quote, httpOptions).pipe(
+      tap(_ => this.log(`Quote Service: ${quote.id} updated!`)),
+      catchError(this.handleError<any>('updateQuote'))
     );
   }
 

@@ -3,6 +3,8 @@ import { ReactiveFormsModule, FormControl, FormBuilder, Validators } from '@angu
 import { Quote } from '../../data/models/domain/quote';
 import { CustomerForm } from '../../data/models/page/customerform';
 import { QuoteInput } from '../../data/models/domain/quoteinput';
+import { QuoteService } from '../quote.service';
+
 @Component({
   selector: 'app-customer-form',
   templateUrl: './customer-form.component.html',
@@ -10,18 +12,20 @@ import { QuoteInput } from '../../data/models/domain/quoteinput';
 })
 export class CustomerFormComponent implements OnInit {
   previousCarrierOptions: string[] = ['Other', 'Lizard', 'Pervasive', 'None']; // Select these from database
+  stateOptions: string[] = ["AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
   inputsComplete = 0;
   isOpen = true;
-  @Input() quote: Quote;
+  quote: Quote = new Quote();
+
   customerForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     dateOfBirth: ['', Validators.required],
-    email: ['', Validators.email],
+    email: ['', [Validators.required, Validators.email]],
     phone: [''],
     address: ['', Validators.required],
     city: ['', Validators.required],
-    state: ['', Validators.required],
+    state: ['Select State', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
     zip: ['', Validators.required],
     ssn: ['', Validators.required],
     previousCarrier: ['None', Validators.required],
@@ -31,10 +35,9 @@ export class CustomerFormComponent implements OnInit {
     multiCar: [false]
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private quoteService: QuoteService) { }
 
   ngOnInit() {
-    
   }
 
   get fName() { return this.customerForm.get('firstName'); }
@@ -60,6 +63,12 @@ export class CustomerFormComponent implements OnInit {
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.warn(this.customerForm.value);
+    
+    // Map the customerForm values to the current quote.
+    Object.assign(this.quote, this.customerForm.value);
+    console.log(this.quote);
+
+    this.quoteService.addQuote(this.quote).subscribe();
   }
 
   onFormFieldCompleted() {

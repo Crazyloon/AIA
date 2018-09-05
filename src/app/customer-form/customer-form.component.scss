@@ -4,7 +4,7 @@
 
 .expanding-card {
   max-width: 700px;
-
+  margin-bottom: 15px;
   .expanding-card-header {
     display: flex;
     justify-content: space-between;
@@ -26,6 +26,16 @@
         cursor: pointer;
       }
 
+      & object {
+        width: 20px;
+        height: 20px;
+        transform: rotate(0deg);
+        transition: transform 0.4s ease-in-out;
+
+        &.open {
+          transform: rotate(180deg);
+        }
+      }
       & img {
         width: 20px;
         height: 20px;
@@ -45,7 +55,7 @@
     transition: max-height 0.4s ease-in-out;
 
     &.open {
-      max-height: 1230px;
+      max-height: 1500px;
     }
 
     .expanding-card-body {

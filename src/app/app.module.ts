@@ -11,6 +11,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { QuoteListComponent } from './quote-list/quote-list.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     LandingPageComponent,
     ExpandingCardComponent,
     CustomerFormComponent,
+    QuoteListComponent,
   ],
   imports: [
     BrowserModule,
