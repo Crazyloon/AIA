@@ -31,4 +31,7 @@ export class QuoteSummaryComponent implements OnInit {
       .subscribe(quote => this.quote = quote);
   }
 
+  isDiscount(val: number): boolean {
+    return val < 0;
+  }
 }

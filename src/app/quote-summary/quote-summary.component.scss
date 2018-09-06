@@ -58,6 +58,19 @@
   }
 }
 
+.driver-details, .vehicle-details{
+  &:nth-of-type(n + 2){
+    margin-top: 10px;
+  }
+}
+
+.discount{
+  color: rgb(34, 190, 34);
+}
+
+.premium{
+  color: rgb(220, 20, 20);
+}
 // .quote-drivers{
 //   .driver-details, .driver-discounts{
 //     display: flex;
