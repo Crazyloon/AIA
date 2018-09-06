@@ -16,7 +16,7 @@
     <ng-container *ngFor="let quote of quotes">
       <tr *ngIf="!quote.discarded">
         <td>
-          <a class="open-quote-link" href="quote/details/{{quote.id}}">
+          <a class="open-quote-link" routerLink="/quote/details/{{quote.id}}">
             <div>{{quote.id}} <img class="open-quote-icon" src="../../assets/icons/003-folder.svg" alt="open"/></div>
           </a>
         </td>

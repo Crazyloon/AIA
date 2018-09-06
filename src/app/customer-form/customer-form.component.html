@@ -227,32 +227,4 @@
 <pre>{{customerForm.value | json}}</pre>
 <pre>{{quote | json}}</pre>
  -->
-
-
-
-
-    <!-- <div *ngFor="let inputs of inputGroups">
-      <div *ngIf="inputs.type == 'text' || inputs.type == 'date'; else isCheckbox" class="form-group">
-        <label>{{inputs.label}}</label>
-        <input class="form-control" type="{{inputs.type}}" />
-      </div>
-      <ng-template #isCheckbox>
-        <div *ngIf="inputs.type == 'checkbox'; else isSelectList" class="form-group">
-          <label class="check-box-input">
-            {{inputs.label}}
-            <input  type="{{inputs.type}}" checked={{inputs.value}} class="form-control"/>
-            <span class="checkmark"></span>
-          </label>
-        </div>
-        <ng-template #isSelectList>
-          <div *ngIf="inputs.type == 'select'" class="form-group">
-              <label>{{inputs.label}}</label>
-              <select class="form-control">
-                <option *ngFor="let option of previousCarrierOptions" value="{{option}}">
-                  {{option}}
-                </option>
-              </select>
-          </div>
-        </ng-template>
-      </ng-template>
-    </div> -->
+ 

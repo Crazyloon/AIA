@@ -1,3 +1,6 @@
+import { Driver } from "./driver";
+import { Vehicle } from "./vehicle";
+
 export class Quote {
   constructor() {}
   // constructor(user: number, fName: string, lName: string, dob: string,
@@ -43,4 +46,6 @@ export class Quote {
   previousCarrierLizardDiscount: number;
   previousCarrierPervasive: boolean;
   previousCarrierPervasiveDiscount: number;
+  drivers: Driver[];
+  vehicles: Vehicle[];
 }

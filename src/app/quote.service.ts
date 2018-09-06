@@ -28,11 +28,18 @@ export class QuoteService {
   }
 
   getQuotes(): Observable<Quote[]> {
-    console.log('URL ' + this.quotesUrl);
     return this.http.get<Quote[]>('api/quotes')
     .pipe(
       tap(quotes => this.log('Quote Service: got quotes!')),
       catchError(this.handleError('getQuotes', []))
+    );
+  }
+  /** GET quote by id. Will 404 if id not found */
+  getQuote(id: number): Observable<Quote> {
+    const url = `${this.quotesUrl}/${id}`;
+    return this.http.get<Quote>(url).pipe(
+      tap(_ => this.log(`Quote Service: got quote id: ${id}`)),
+      catchError(this.handleError<Quote>(`getQuote id: ${id}`))
     );
   }
 

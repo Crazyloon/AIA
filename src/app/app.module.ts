@@ -12,6 +12,7 @@ import { InMemoryDataService } from './in-memory-data.service';
 import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { QuoteListComponent } from './quote-list/quote-list.component';
+import { QuoteSummaryComponent } from './quote-summary/quote-summary.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { QuoteListComponent } from './quote-list/quote-list.component';
     ExpandingCardComponent,
     CustomerFormComponent,
     QuoteListComponent,
+    QuoteSummaryComponent,
   ],
   imports: [
     BrowserModule,
