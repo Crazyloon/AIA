@@ -15,7 +15,7 @@ export class CustomerFormComponent implements OnInit {
   stateOptions: string[] = ["AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
   inputsComplete = 0;
   isOpen = true;
-  quote: Quote = new Quote();
+  @Input() quote: Quote;
 
   customerForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -63,12 +63,15 @@ export class CustomerFormComponent implements OnInit {
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.warn(this.customerForm.value);
-    
     // Map the customerForm values to the current quote.
     Object.assign(this.quote, this.customerForm.value);
-    console.log(this.quote);
+    this.add(this.quote);    
+  }
 
-    this.quoteService.addQuote(this.quote).subscribe();
+  add(quote: Quote): void {
+    if(!quote) return;
+    this.quoteService.addQuote(quote)
+      .subscribe(quote => this.quote = quote);
   }
 
   onFormFieldCompleted() {

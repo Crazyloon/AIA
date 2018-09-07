@@ -13,6 +13,8 @@ import { CustomerFormComponent } from './customer-form/customer-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { QuoteListComponent } from './quote-list/quote-list.component';
 import { QuoteSummaryComponent } from './quote-summary/quote-summary.component';
+import { DriverFormComponent } from './driver-form/driver-form.component';
+import { NewQuotePageComponent } from './new-quote-page/new-quote-page.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { QuoteSummaryComponent } from './quote-summary/quote-summary.component';
     CustomerFormComponent,
     QuoteListComponent,
     QuoteSummaryComponent,
+    DriverFormComponent,
+    NewQuotePageComponent,
   ],
   imports: [
     BrowserModule,

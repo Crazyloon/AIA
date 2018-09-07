@@ -84,5 +84,4 @@ export class QuoteService {
       return of(result as T);
     };
   }
-
 }

@@ -13,6 +13,7 @@
           <label>First Name</label>
           <input class="form-control"
             [class.is-valid]="fName.valid"          
+            [class.is-invalid]="fName.invalid && (fName.dirty || fName.touched)" 
             formControlName="firstName"
             type="text"
             required 
@@ -28,7 +29,8 @@
           <input class="form-control"
             [class.is-valid]="lName.valid"
             [class.is-invalid]="lName.invalid && (lName.dirty || lName.touched)" 
-            type="text" formControlName="lastName"
+            formControlName="lastName"
+            type="text"
             required 
             />
           <div *ngIf="lName.invalid && (lName.dirty || lName.touched)" class="alert alert-danger">

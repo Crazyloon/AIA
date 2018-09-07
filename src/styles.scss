@@ -47,6 +47,11 @@ div.valid-feedback{
   margin-left: 13px;
 }
 
+.thead-brand{
+  color: #ffffff;
+  background-color: $color-primary;
+}
+
 // Beveled Buttons - Works with bootstrap 4 buttons of medium (standard) size 'btn btn-type'
 .bevel{
   box-shadow: $btn-bevel-down;

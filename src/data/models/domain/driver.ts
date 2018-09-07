@@ -10,6 +10,7 @@ export class Driver {
   firstName: string;
   lastName: string;
   dateOfBirth: Date;
+  ssn: string;
   licenseNumber: string;
   issuingState: string;
   safeDrivingSchool: boolean;
