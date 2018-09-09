@@ -11,7 +11,7 @@ import { Driver } from '../../data/models/domain/driver';
   styleUrls: ['./driver-form.component.scss']
 })
 export class DriverFormComponent implements OnInit {
-  stateOptions: string[] = ["AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
+  stateOptions: string[] = ["Select State", "AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
   inputsComplete = 0;
   isOpen = true;
   @Input() quote: Quote;
@@ -74,5 +74,5 @@ export class DriverFormComponent implements OnInit {
     const age_dt = new Date(diff_ms); 
   
     return Math.abs(age_dt.getUTCFullYear() - 1970);
-}
+  }
 }

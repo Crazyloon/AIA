@@ -15,6 +15,7 @@ import { QuoteListComponent } from './quote-list/quote-list.component';
 import { QuoteSummaryComponent } from './quote-summary/quote-summary.component';
 import { DriverFormComponent } from './driver-form/driver-form.component';
 import { NewQuotePageComponent } from './new-quote-page/new-quote-page.component';
+import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NewQuotePageComponent } from './new-quote-page/new-quote-page.component
     QuoteSummaryComponent,
     DriverFormComponent,
     NewQuotePageComponent,
+    VehicleFormComponent,
   ],
   imports: [
     BrowserModule,

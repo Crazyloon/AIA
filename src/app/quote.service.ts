@@ -43,6 +43,14 @@ export class QuoteService {
     );
   }
 
+  getDrivers(id: number): Observable<String[]> {
+    const url = `${this.quotesUrl}/${id}/drivers/firstName`;
+    return this.http.get<String[]>(url).pipe(
+      tap(_ => this.log(`Quote Service: got drivers list`)),
+      catchError(this.handleError<String[]>(`getDrivers in Quote: ${id}`))
+    );
+  }
+
   addQuote(quote: Quote): Observable<Quote> {
     return this.http.post<Quote>(this.quotesUrl, quote, httpOptions).pipe(
       tap((q: Quote) => this.log(`Quote Service: ${q.id} added!`)),
