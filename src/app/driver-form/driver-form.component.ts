@@ -16,7 +16,7 @@ export class DriverFormComponent implements OnInit {
   isOpen = true;
   driver: Driver;
   @Input() quote: Quote;
-  @Output() driverAdded = new EventEmitter<{id: number, name: string}>();
+  @Output() quoteChange = new EventEmitter<Quote>();
 
   driverForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -59,20 +59,14 @@ export class DriverFormComponent implements OnInit {
     
     this.quote.addDriver(this.driver);
     this.updateQuote();
-    // if quote updates successfully:
-    setTimeout(() => console.log(this.quote.drivers[0]), 1000);
-    setTimeout(() => this.notifyDriverWasAdded(), 1000);
   }
-
-  notifyDriverWasAdded(){
-    let driverSelection = {id: this.driver.id, name: this.driver.firstName};
-    debugger;
-    this.driverAdded.emit(driverSelection);
-  }
-
+  
   updateQuote(): void {
     this.quoteService.updateQuote(this.quote)
-      .subscribe();
+    .subscribe(q => {
+      this.quote = q;
+      this.quoteChange.emit(this.quote);
+    });
   }
 
   calculateAge(birthDate) {

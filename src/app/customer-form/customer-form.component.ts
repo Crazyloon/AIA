@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ReactiveFormsModule, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Quote } from '../../data/models/domain/quote';
 import { CustomerForm } from '../../data/models/page/customerform';
@@ -16,6 +16,7 @@ export class CustomerFormComponent implements OnInit {
   inputsComplete = 0;
   isOpen = true;
   @Input() quote: Quote;
+  @Output() quoteChange: EventEmitter<Quote>;
 
   customerForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -65,13 +66,16 @@ export class CustomerFormComponent implements OnInit {
     console.warn(this.customerForm.value);
     // Map the customerForm values to the current quote.
     Object.assign(this.quote, this.customerForm.value);
-    this.add(this.quote);    
+    this.addQuote(this.quote);
   }
 
-  add(quote: Quote): void {
+  addQuote(quote: Quote): void {
     if(!quote) return;
     this.quoteService.addQuote(quote)
-      .subscribe(quote => {this.quote = quote; console.log(this.quote);});    
+      .subscribe(quote => {
+        this.quote = quote;
+        this.quoteChange.emit(this.quote);
+      });    
   }
 
   onFormFieldCompleted() {

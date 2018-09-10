@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Quote } from '../../data/models/domain/quote';
 import { Validators, FormBuilder } from '@angular/forms';
 import { QuoteService } from '../quote.service';
@@ -12,12 +12,12 @@ import { Observable } from 'rxjs';
   styleUrls: ['./vehicle-form.component.scss']
 })
 export class VehicleFormComponent implements OnInit {
-  @Input() quote: Quote;
-  @Input() driverOptions: {id: number, name: string}[];
   primaryDriverOptions = [];
   inputsComplete = 0;
   isOpen = true;
   vehicle: Vehicle;
+  @Input() quote: Quote;
+  @Output() quoteChange = new EventEmitter<Quote>();
 
   vehicleForm = this.fb.group({
     primaryDriverId: [0],
@@ -74,17 +74,15 @@ export class VehicleFormComponent implements OnInit {
     console.warn(this.vehicleForm.value);
     // Map the vehicleForm values to the current vehicle.
     Object.assign(this.vehicle, this.vehicleForm.value);
-    this.add(this.vehicle); 
+    this.quote.addVehicle(this.vehicle)
     this.updateQuote();
   }
 
-  add(vehicle: Vehicle): void {
-    if(!vehicle) return;
-    this.quote.addVehicle(vehicle);
-  }
-
   updateQuote(): void {
-    this.quoteService.updateQuote(this.quote);
+    this.quoteService.updateQuote(this.quote)
+      .subscribe(q => {
+        this.quote = q;
+        this.quoteChange.emit(this.quote);
+      });
   }
-
 }
