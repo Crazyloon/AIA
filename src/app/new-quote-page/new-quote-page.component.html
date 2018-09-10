@@ -4,8 +4,11 @@
 <!-- <app-customer-form [quote]="quote"></app-customer-form>
 <app-driver-form [quote]="quote"></app-driver-form>
 <app-vehicle-form [quote]="quote"></app-vehicle-form> -->
+
 <app-customer-form [quote]="quote" (quoteChange)="updateQuote($event)"></app-customer-form>
 <app-driver-form [quote]="quote" (quoteChange)="updateQuote($event)"></app-driver-form>
 <app-vehicle-form [quote]="quote" (quoteChange)="updateQuote($event)"></app-vehicle-form>
 
-
+<!-- <app-customer-form [(quote)]="quote"></app-customer-form>
+<app-driver-form [(quote)]="quote"></app-driver-form>
+<app-vehicle-form [(quote)]="quote"></app-vehicle-form> -->

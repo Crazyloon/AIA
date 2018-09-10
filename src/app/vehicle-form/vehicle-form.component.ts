@@ -41,13 +41,6 @@ export class VehicleFormComponent implements OnInit {
 
   ngOnInit() {
     this.vehicle = new Vehicle();
-
-
-    // TEST CODE
-    // Need to update this on drivers added within the drivers component
-    // this.primaryDriverOptions = [{id: 0, driver: 'Select Driver'}, this.quote.drivers.map(d => {return {id: d.id, driver: d.firstName}})];
-    // Populate primary drivers via drivers list for this quoteId
-    // this.primaryDriverOptions = this.quoteService.getDrivers(this.quote.id).subscribe;
   }
 
   get primaryDriverId() { return this.vehicleForm.get('primaryDriverId'); }
@@ -81,7 +74,6 @@ export class VehicleFormComponent implements OnInit {
   updateQuote(): void {
     this.quoteService.updateQuote(this.quote)
       .subscribe(q => {
-        this.quote = q;
         this.quoteChange.emit(this.quote);
       });
   }

@@ -16,7 +16,7 @@ export class CustomerFormComponent implements OnInit {
   inputsComplete = 0;
   isOpen = true;
   @Input() quote: Quote;
-  @Output() quoteChange: EventEmitter<Quote>;
+  @Output() quoteChange = new EventEmitter<Quote>();
 
   customerForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -64,8 +64,9 @@ export class CustomerFormComponent implements OnInit {
   onSubmit() {
     // TODO: Use EventEmitter with form value
     console.warn(this.customerForm.value);
+    console.log(this.quote);
     // Map the customerForm values to the current quote.
-    Object.assign(this.quote, this.customerForm.value);
+    Object.assign(this.quote, ...this.customerForm.value);
     this.addQuote(this.quote);
   }
 
@@ -73,7 +74,8 @@ export class CustomerFormComponent implements OnInit {
     if(!quote) return;
     this.quoteService.addQuote(quote)
       .subscribe(quote => {
-        this.quote = quote;
+        this.quote.id = quote.id;
+        debugger;
         this.quoteChange.emit(this.quote);
       });    
   }

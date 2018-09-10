@@ -56,6 +56,8 @@ export class DriverFormComponent implements OnInit {
     console.warn(this.driverForm.value);
     // Map the driverForm values to the current driver.
     Object.assign(this.driver, this.driverForm.value);
+    console.log(this.quote);
+    
     
     this.quote.addDriver(this.driver);
     this.updateQuote();
@@ -64,7 +66,6 @@ export class DriverFormComponent implements OnInit {
   updateQuote(): void {
     this.quoteService.updateQuote(this.quote)
     .subscribe(q => {
-      this.quote = q;
       this.quoteChange.emit(this.quote);
     });
   }
