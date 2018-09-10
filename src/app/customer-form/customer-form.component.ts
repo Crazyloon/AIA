@@ -71,7 +71,7 @@ export class CustomerFormComponent implements OnInit {
   add(quote: Quote): void {
     if(!quote) return;
     this.quoteService.addQuote(quote)
-      .subscribe(quote => this.quote = quote);
+      .subscribe(quote => {this.quote = quote; console.log(this.quote);});    
   }
 
   onFormFieldCompleted() {

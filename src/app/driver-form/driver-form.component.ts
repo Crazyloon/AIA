@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Quote } from '../../data/models/domain/quote';
 import { Validators, FormBuilder } from '@angular/forms';
 import { QuoteService } from '../quote.service';
@@ -14,8 +14,9 @@ export class DriverFormComponent implements OnInit {
   stateOptions: string[] = ["Select State", "AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
   inputsComplete = 0;
   isOpen = true;
-  @Input() quote: Quote;
   driver: Driver;
+  @Input() quote: Quote;
+  @Output() driverAdded = new EventEmitter<{id: number, name: string}>();
 
   driverForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -55,17 +56,23 @@ export class DriverFormComponent implements OnInit {
     console.warn(this.driverForm.value);
     // Map the driverForm values to the current driver.
     Object.assign(this.driver, this.driverForm.value);
-    this.add(this.driver); 
+    
+    this.quote.addDriver(this.driver);
     this.updateQuote();
+    // if quote updates successfully:
+    setTimeout(() => console.log(this.quote.drivers[0]), 1000);
+    setTimeout(() => this.notifyDriverWasAdded(), 1000);
   }
 
-  add(driver: Driver): void {
-    if(!driver) return;
-    this.quote.addDriver(driver);
+  notifyDriverWasAdded(){
+    let driverSelection = {id: this.driver.id, name: this.driver.firstName};
+    debugger;
+    this.driverAdded.emit(driverSelection);
   }
 
   updateQuote(): void {
-    this.quoteService.updateQuote(this.quote);
+    this.quoteService.updateQuote(this.quote)
+      .subscribe();
   }
 
   calculateAge(birthDate) {

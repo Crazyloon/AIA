@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap, take } from 'rxjs/operators';
+import { Driver } from '../data/models/domain/driver';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -24,6 +25,7 @@ export class QuoteService {
 
 
   private log(message: string) {
+    console.log(`QuoteService: ${message}`);
     this.messageService.add(`QuoteService: ${message}`);
   }
 
@@ -43,17 +45,17 @@ export class QuoteService {
     );
   }
 
-  getDrivers(id: number): Observable<String[]> {
-    const url = `${this.quotesUrl}/${id}/drivers/firstName`;
-    return this.http.get<String[]>(url).pipe(
+  getDrivers(id: number): Observable<Driver[]> {
+    const url = `${this.quotesUrl}/${id}/drivers`;
+    return this.http.get<Driver[]>(url).pipe(
       tap(_ => this.log(`Quote Service: got drivers list`)),
-      catchError(this.handleError<String[]>(`getDrivers in Quote: ${id}`))
+      catchError(this.handleError<Driver[]>(`getDrivers in Quote: ${id}`))
     );
   }
 
   addQuote(quote: Quote): Observable<Quote> {
     return this.http.post<Quote>(this.quotesUrl, quote, httpOptions).pipe(
-      tap((q: Quote) => this.log(`Quote Service: ${q.id} added!`)),
+      tap((q: Quote) => this.log(`Quote Service: quote: ${q.id} added!`)),
       catchError(this.handleError<Quote>('addQuote'))
     );
   }
@@ -70,7 +72,8 @@ export class QuoteService {
 
   /** PUT: update the quote on the server */
   updateQuote (quote: Quote): Observable<any> {
-    return this.http.put(this.quotesUrl, quote, httpOptions).pipe(
+    const url = `${this.quotesUrl}/${quote.id}`;
+    return this.http.put(url, quote, httpOptions).pipe(
       tap(_ => this.log(`Quote Service: ${quote.id} updated!`)),
       catchError(this.handleError<any>('updateQuote'))
     );

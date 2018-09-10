@@ -48,7 +48,7 @@
                 [class.is-invalid]="primaryDriverId.invalid && (primaryDriverId.dirty || primaryDriverId.touched)"
                 formControlName="primaryDriverId"
                 >
-              <option *ngFor="let option of primaryDriverOptions" value="{{option.id}}">
+              <option *ngFor="let option of driverOptions" value="{{option.id}}">
                 {{option.driver}}
               </option>
             </select>
@@ -235,6 +235,11 @@
             </label>
           </div>
           <button type="submit" class="btn btn-success bevel bevel-md" [disabled]="!vehicleForm.valid">Save Vehicle</button>
+          <div *ngIf="!quote.id" class="alert alert-danger">
+            <span class="invalid-feedback" style="display: block;">
+              Start by saving customer information.
+            </span>
+          </div>
         </form>
       </div>
   

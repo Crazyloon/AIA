@@ -7,7 +7,10 @@ import { Quote } from '../../data/models/domain/quote';
   styleUrls: ['./new-quote-page.component.scss']
 })
 export class NewQuotePageComponent implements OnInit {
-  quote: Quote = new Quote();
+  public quote: Quote = new Quote();
+  public driverSelection: {id: number, name: string};
+  public driverOptions: {id: number, name: string}[] = [];
+
   constructor() { }
 
   ngOnInit() {
@@ -15,5 +18,10 @@ export class NewQuotePageComponent implements OnInit {
     this.quote.vehicles = [];
   }
 
+  driverSelectionAdded(driverSelection: {id: number, name: string}){
+    debugger;
+    this.driverSelection = driverSelection;
+    this.driverOptions.push(driverSelection);
+  }
 
 }

@@ -28,7 +28,7 @@ img.icon{
 }
 
 
-input.form-control.is-invalid, select.form-control.is-invalid{
+input.form-control.is-invalid, select.form-control.is-invalid, button{
 
   & ~ div.alert.alert-danger{
     margin: 5px 0 0 0;
