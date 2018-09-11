@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Quote } from '../../data/models/domain/quote';
 import { Validators, FormBuilder } from '@angular/forms';
-import { QuoteService } from '../quote.service';
 import { Vehicle } from '../../data/models/domain/vehicle';
-import { Driver } from '../../data/models/domain/driver';
-import { Observable } from 'rxjs';
+import { Quote } from '../../data/models/domain/quote';
+import { QuoteService } from '../quote.service';
+import { DriverSelect } from '../../data/models/shared/driverselect';
 
 @Component({
   selector: 'app-vehicle-form',
@@ -12,15 +11,22 @@ import { Observable } from 'rxjs';
   styleUrls: ['./vehicle-form.component.scss']
 })
 export class VehicleFormComponent implements OnInit {
-  primaryDriverOptions = [];
+  primaryDriverOptions: DriverSelect[] = [];
   inputsComplete = 0;
   isOpen = true;
   vehicle: Vehicle;
-  @Input() quote: Quote;
+  private _quote: Quote;
+  @Input() 
+  set quote(quote: Quote){
+    this._quote = quote;
+    this.primaryDriverOptions = [];
+    this._quote.drivers.forEach(d => this.primaryDriverOptions.push({id: d.id, fName: d.firstName, lName: d.lastName})); // d.id returns null because drivers are not added via quoteService or driverService
+  }
+
   @Output() quoteChange = new EventEmitter<Quote>();
 
   vehicleForm = this.fb.group({
-    primaryDriverId: [0],
+    primaryDriverId: [],
     vin: ['', [Validators.required, Validators.minLength(17), Validators.maxLength(17)]],
     make: ['', Validators.required],
     model: ['', Validators.required],
@@ -63,18 +69,16 @@ export class VehicleFormComponent implements OnInit {
   }
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
     console.warn(this.vehicleForm.value);
-    // Map the vehicleForm values to the current vehicle.
     Object.assign(this.vehicle, this.vehicleForm.value);
-    this.quote.addVehicle(this.vehicle)
+    this._quote.addVehicle(this.vehicle)
     this.updateQuote();
   }
 
   updateQuote(): void {
-    this.quoteService.updateQuote(this.quote)
+    this.quoteService.updateQuote(this._quote)
       .subscribe(q => {
-        this.quoteChange.emit(this.quote);
+        this.quoteChange.emit(this._quote);
       });
   }
 }

@@ -24,7 +24,7 @@
               </tr>
             </thead> 
             <tbody>
-              <ng-container *ngFor="let vehicle of quote.vehicles">
+              <ng-container *ngFor="let vehicle of _quote.vehicles">
                 <tr>
                   <td>{{vehicle.primaryDriver}}</td>
                   <td>{{vehicle.make}}</td>
@@ -48,15 +48,10 @@
                 [class.is-invalid]="primaryDriverId.invalid && (primaryDriverId.dirty || primaryDriverId.touched)"
                 formControlName="primaryDriverId"
                 >
-              <option *ngFor="let option of driverOptions" value="{{option.id}}">
-                {{option.driver}}
+              <option *ngFor="let option of primaryDriverOptions"  value="{{option.id}}">
+                {{option.fName}} {{option.lName}}
               </option>
             </select>
-            <!-- <div *ngIf="milesToWork.invalid && (milesToWork.dirty || milesToWork.touched)" class="alert alert-danger">
-              <span class="invalid-feedback" *ngIf="milesToWork.errors.required || milesToWork.errors.minlength || milesToWork.errors.maxlength">
-                Issuing State is required.
-              </span>
-            </div> -->
           </div>
           <div class="form-group">
             <label>VIN</label>
@@ -235,7 +230,7 @@
             </label>
           </div>
           <button type="submit" class="btn btn-success bevel bevel-md" [disabled]="!vehicleForm.valid">Save Vehicle</button>
-          <div *ngIf="!quote.id" class="alert alert-danger">
+          <div *ngIf="!_quote.id" class="alert alert-danger">
             <span class="invalid-feedback" style="display: block;">
               Start by saving customer information.
             </span>
@@ -255,6 +250,7 @@
   
   <!-- View data 
   <pre>{{customerForm.value | json}}</pre>
-  <pre>{{quote | json}}</pre>
+  <pre>{{_quote | json}}</pre>
    -->
+   <pre>{{quote | json}}</pre>
    

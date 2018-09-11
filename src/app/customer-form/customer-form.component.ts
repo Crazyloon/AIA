@@ -75,7 +75,6 @@ export class CustomerFormComponent implements OnInit {
     this.quoteService.addQuote(quote)
       .subscribe(quote => {
         this.quote.id = quote.id;
-        debugger;
         this.quoteChange.emit(this.quote);
       });    
   }

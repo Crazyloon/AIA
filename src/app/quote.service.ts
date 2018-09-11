@@ -45,13 +45,6 @@ export class QuoteService {
     );
   }
 
-  getDrivers(id: number): Observable<Driver[]> {
-    const url = `${this.quotesUrl}/${id}/drivers`;
-    return this.http.get<Driver[]>(url).pipe(
-      tap(_ => this.log(`Quote Service: got drivers list`)),
-      catchError(this.handleError<Driver[]>(`getDrivers in Quote: ${id}`))
-    );
-  }
 
   addQuote(quote: Quote): Observable<Quote> {
     return this.http.post<Quote>(this.quotesUrl, quote, httpOptions).pipe(
@@ -74,8 +67,33 @@ export class QuoteService {
   updateQuote (quote: Quote): Observable<any> {
     const url = `${this.quotesUrl}/${quote.id}`;
     return this.http.put(url, quote, httpOptions).pipe(
-      tap(_ => this.log(`Quote Service: ${quote.id} updated!`)),
+      tap(_ => this.log(`Quote Service: Quote - ${quote.id} updated!`)),
       catchError(this.handleError<any>('updateQuote'))
+    );
+  }
+
+  
+  getDrivers(quoteId: number): Observable<Driver[]> {
+    const url = `${this.quotesUrl}/${quoteId}/drivers`;
+    return this.http.get<Driver[]>(url).pipe(
+      tap(_ => this.log(`Quote Service: got drivers list`)),
+      catchError(this.handleError<Driver[]>(`getDrivers in Quote: ${quoteId}`))
+    );
+  }
+
+  addDriver(quote: Quote, driver: Driver): Observable<Driver> {
+    const url = `${this.quotesUrl}/${quote.id}/drivers`;
+    return this.http.post<Driver>(url, driver, httpOptions).pipe(
+      tap(_ => this.log(`Quote Service: Driver - ${driver.id} updated!`)),
+      catchError(this.handleError<Driver>('addDriver'))
+    );
+  }
+
+  updateDriver(quote: Quote, driver: Driver): Observable<any> {
+    const url = `${this.quotesUrl}/${quote.id}/drivers/${driver.id}`;
+    return this.http.put(url, driver, httpOptions).pipe(
+      tap(_ => this.log(`Quote Service: Driver - ${driver.id} updated!`)),
+      catchError(this.handleError<Driver>(`updateDriver`))
     );
   }
 

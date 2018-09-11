@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Quote } from '../../data/models/domain/quote';
 import { Validators, FormBuilder } from '@angular/forms';
 import { QuoteService } from '../quote.service';
-import { DriverService } from '../driver.service';
 import { Driver } from '../../data/models/domain/driver';
 
 @Component({
@@ -29,13 +28,10 @@ export class DriverFormComponent implements OnInit {
     under23YearsOld: [false]
   });
 
-  constructor(private fb: FormBuilder, private quoteService: QuoteService, private driverService: DriverService) { }
+  constructor(private fb: FormBuilder, private quoteService: QuoteService) { }
 
   ngOnInit() {
     this.driver = new Driver();
-    // this.driver.firstName = 'Russell';
-    // this.driver.lastName = 'Dow';
-    // this.quote.addDriver(this.driver);
   }
 
   get fName() { return this.driverForm.get('firstName'); }
@@ -52,15 +48,18 @@ export class DriverFormComponent implements OnInit {
   }
 
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.driverForm.value);
-    // Map the driverForm values to the current driver.
-    Object.assign(this.driver, this.driverForm.value);
-    console.log(this.quote);
-    
-    
+    this.addDriver();
     this.quote.addDriver(this.driver);
     this.updateQuote();
+  }
+
+  addDriver(): void {
+    Object.assign(this.driver, this.driverForm.value);
+    debugger;
+    this.quoteService.addDriver(this.quote, this.driver)
+      .subscribe(d => {
+        this.driver = d;
+      });
   }
   
   updateQuote(): void {

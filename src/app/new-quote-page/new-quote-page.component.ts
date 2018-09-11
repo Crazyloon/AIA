@@ -19,13 +19,8 @@ export class NewQuotePageComponent implements OnInit {
     this.quote.vehicles = [];
   }
 
-  driverSelectionAdded(driverSelection: {id: number, name: string}){
-    this.driverSelection = driverSelection;
-    this.driverOptions.push(driverSelection);
-  }
-
-  updateQuote(quote: Quote){
-    this.quote = quote;
+  onQuoteUpdated(quote: Quote){
+    this.quote = Object.assign(new Quote(), quote);
   }
 
 }
