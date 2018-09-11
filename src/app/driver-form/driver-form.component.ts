@@ -48,17 +48,16 @@ export class DriverFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.addDriver();
-    this.quote.addDriver(this.driver);
-    this.updateQuote();
+    this.addDriver();    
   }
 
   addDriver(): void {
     Object.assign(this.driver, this.driverForm.value);
-    debugger;
-    this.quoteService.addDriver(this.quote, this.driver)
+    this.quoteService.addDriver(this.driver)
       .subscribe(d => {
         this.driver = d;
+        this.quote.addDriver(this.driver);
+        this.updateQuote();
       });
   }
   

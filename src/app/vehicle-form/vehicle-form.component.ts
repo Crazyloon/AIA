@@ -81,4 +81,12 @@ export class VehicleFormComponent implements OnInit {
         this.quoteChange.emit(this._quote);
       });
   }
+
+  getPrimaryDrivers(){
+    this.quoteService.getDrivers(this._quote.id)
+      .subscribe(d => {
+        this.primaryDriverOptions = [];    
+        d.forEach(d => this.primaryDriverOptions.push({id: d.id, fName: d.firstName, lName: d.lastName}));
+      });
+  }
 }

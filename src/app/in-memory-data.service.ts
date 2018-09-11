@@ -202,6 +202,34 @@ export class InMemoryDataService implements InMemoryDbService {
       },
     ];
 
-    return {quotes};
+    const drivers = [
+      {
+        id: 1,
+        quoteId: 1,
+        firstName: 'Russell',
+        lastName: 'Dow',
+        dateOfBirth: new Date('08/15/1988'),
+        licenseNumber: 'DOWRJ**132NN',
+        issuingState: 'WA',
+        safeDrivingSchool: true,
+        safeDrivingSchoolDiscount: -0.05,
+        under23YearsOld: false,
+        under23YearsOldDiscount: null,
+      },
+      {
+        id: 2,
+        quoteId: 1,
+        firstName: 'Kelvin',
+        lastName: 'Celcius',
+        dateOfBirth: new Date('08/12/1908'),
+        licenseNumber: 'KCEL**132NN',
+        issuingState: 'WA',
+        safeDrivingSchool: true,
+        safeDrivingSchoolDiscount: -0.05,
+        under23YearsOld: false,
+        under23YearsOldDiscount: null,
+      }
+    ];
+    return {quotes, drivers};
   }
 }
