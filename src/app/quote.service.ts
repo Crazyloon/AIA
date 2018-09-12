@@ -5,6 +5,7 @@ import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap, take } from 'rxjs/operators';
 import { Driver } from '../data/models/domain/driver';
+import { Vehicle } from '../data/models/domain/vehicle';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,6 +17,7 @@ const httpOptions = {
 export class QuoteService {
   private quotesUrl: string;
   private driversUrl: string;
+  private vehiclesUrl: string;
 
   constructor(
     private http: HttpClient,
@@ -23,6 +25,7 @@ export class QuoteService {
   ) {
     this.quotesUrl = 'api/quotes';
     this.driversUrl = 'api/drivers';
+    this.vehiclesUrl = 'api/vehicles';
    }
 
 
@@ -86,7 +89,7 @@ export class QuoteService {
   addDriver(driver: Driver): Observable<Driver> {
     const url = `${this.driversUrl}`;
     return this.http.post<Driver>(url, driver, httpOptions).pipe(
-      tap(_ => this.log(`Quote Service: Driver - ${driver.id} added!`)),
+      tap((d: Driver) => this.log(`Quote Service: Driver - ${d.id} added!`)),
       catchError(this.handleError<Driver>('addDriver'))
     );
   }
@@ -96,6 +99,30 @@ export class QuoteService {
     return this.http.put(url, driver, httpOptions).pipe(
       tap(_ => this.log(`Quote Service: Driver - ${driver.id} updated!`)),
       catchError(this.handleError<Driver>(`updateDriver`))
+    );
+  }
+
+  getVehicles(quoteId: number): Observable<Vehicle[]> {
+    const url = `${this.vehiclesUrl}`;
+    return this.http.get<Vehicle[]>(url).pipe(
+      tap(_ => this.log(`Quote Service: got vehicles list`)),
+      catchError(this.handleError<Vehicle[]>(`getVehicles in Quote: ${quoteId}`))
+    );
+  }
+
+  addVehicle(vehicle: Vehicle): Observable<Vehicle> {
+    const url = `${this.vehiclesUrl}`;
+    return this.http.post<Vehicle>(url, vehicle, httpOptions).pipe(
+      tap((v: Vehicle) => this.log(`Quote Service: Vehicle - ${v.id} added!`)),
+      catchError(this.handleError<Vehicle>('addVehicle'))
+    );
+  }
+
+  updateVehicle(vehicle: Vehicle): Observable<any> {
+    const url = `${this.vehiclesUrl}/${vehicle.id}`;
+    return this.http.put(url, vehicle, httpOptions).pipe(
+      tap(_ => this.log(`Quote Service: Vehicle - ${vehicle.id} updated!`)),
+      catchError(this.handleError<Vehicle>(`updateVehicle`))
     );
   }
 

@@ -212,10 +212,12 @@
   }
 }
 
-table{
-  width: 100%;
-  overflow: auto;
-  white-space: nowrap;
+div.table-responsive{
+  table.table.table-striped{
+    margin-bottom: 0;
+    overflow: auto;
+    white-space: nowrap;
+  }
 }
 
 @-webkit-keyframes pulsing_shadow {

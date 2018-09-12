@@ -212,8 +212,10 @@
   }
 }
 
-table{
-  width: 100%;
+div.table-responsive{
+  table.table.table-striped{
+    margin-bottom: 0;
+  }
 }
 
 @-webkit-keyframes pulsing_shadow {

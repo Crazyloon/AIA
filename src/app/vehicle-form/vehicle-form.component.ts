@@ -14,6 +14,7 @@ export class VehicleFormComponent implements OnInit {
   primaryDriverOptions: DriverSelect[] = [];
   inputsComplete = 0;
   isOpen = true;
+  isFormUpdating = false;
   vehicle: Vehicle;
   private _quote: Quote;
   @Input() 
@@ -27,14 +28,14 @@ export class VehicleFormComponent implements OnInit {
 
   vehicleForm = this.fb.group({
     primaryDriverId: [],
-    vin: ['', [Validators.required, Validators.minLength(17), Validators.maxLength(17)]],
-    make: ['', Validators.required],
-    model: ['', Validators.required],
-    year: ['', Validators.required],
-    currentValue: ['', Validators.required],
-    milesToWork: [''],
-    annualMileage: ['', Validators.required],
-    daysDrivenPerWeek: ['', Validators.required],
+    vin: ['AIBJRUEJ73827UENS', [Validators.required, Validators.minLength(17), Validators.maxLength(17)]],
+    make: ['Toyota', Validators.required],
+    model: ['Corolla', Validators.required],
+    year: ['2017', Validators.required],
+    currentValue: ['10988', Validators.required],
+    milesToWork: ['24'],
+    annualMileage: ['10200', Validators.required],
+    daysDrivenPerWeek: ['5', Validators.required],
     antiTheft: [false],
     antilockBrakes: [false],
     daytimeLights: [false],
@@ -69,16 +70,45 @@ export class VehicleFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.warn(this.vehicleForm.value);
-    Object.assign(this.vehicle, this.vehicleForm.value);
-    this._quote.addVehicle(this.vehicle)
-    this.updateQuote();
+    if(!this.isFormUpdating){
+      Object.assign(this.vehicle, this.vehicleForm.value);
+      let driver = this.primaryDriverOptions.find(d => d.id == this.vehicle.primaryDriverId);
+      this.vehicle.primaryDriver = `${driver.fName} ${driver.lName}`;
+      if(!this.vehicle.id){
+        this.addVehicle();
+      }
+      else {
+        this.updateVehicle();
+      }
+      this.isFormUpdating = true;
+    }
+  }
+
+  addVehicle(): void {    
+    this.quoteService.addVehicle(this.vehicle)
+      .subscribe(v => {
+        this.vehicle = v;
+        this._quote.addVehicle(this.vehicle);
+        this.updateQuote();      
+      });
+  }
+
+  updateVehicle(): void {
+    this.quoteService.updateVehicle(this.vehicle)
+      .subscribe(v => {
+        this.vehicle = v;
+        this._quote.updateVehicle(this.vehicle);
+        this.updateQuote();
+      });
   }
 
   updateQuote(): void {
     this.quoteService.updateQuote(this._quote)
       .subscribe(q => {
         this.quoteChange.emit(this._quote);
+        this.vehicle = new Vehicle();
+        this.vehicleForm.reset();
+        this.isFormUpdating = false;
       });
   }
 

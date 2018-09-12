@@ -13,6 +13,7 @@ export class DriverFormComponent implements OnInit {
   stateOptions: string[] = ["Select State", "AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
   inputsComplete = 0;
   isOpen = true;
+  isFormUpdating = false;
   driver: Driver;
   @Input() quote: Quote;
   @Output() quoteChange = new EventEmitter<Quote>();
@@ -20,9 +21,9 @@ export class DriverFormComponent implements OnInit {
   driverForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
-    dateOfBirth: ['', Validators.required],
-    ssn: ['', Validators.required],
-    licenseNumber: ['', Validators.required],
+    dateOfBirth: ['1988-08-15', Validators.required],
+    ssn: ['648-13-5223', Validators.required],
+    licenseNumber: ['TESTR**123NN', Validators.required],
     issuingState: ['', Validators.required],
     safeDrivingSchool: [false],
     under23YearsOld: [false]
@@ -48,7 +49,10 @@ export class DriverFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.addDriver();    
+    if(!this.isFormUpdating){
+      this.addDriver();    
+      this.isFormUpdating = true;
+    }
   }
 
   addDriver(): void {
@@ -65,8 +69,13 @@ export class DriverFormComponent implements OnInit {
     this.quoteService.updateQuote(this.quote)
     .subscribe(q => {
       this.quoteChange.emit(this.quote);
+      this.driver = new Driver();
+      this.driverForm.reset();
+      this.isFormUpdating = false;
     });
   }
+
+  
 
   calculateAge(birthDate) {
     const dob = new Date(birthDate);

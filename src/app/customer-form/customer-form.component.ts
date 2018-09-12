@@ -15,20 +15,21 @@ export class CustomerFormComponent implements OnInit {
   stateOptions: string[] = ["Select State", "AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
   inputsComplete = 0;
   isOpen = true;
+  isFormUpdating = false;
   @Input() quote: Quote;
   @Output() quoteChange = new EventEmitter<Quote>();
 
   customerForm = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
-    dateOfBirth: ['', Validators.required],
+    dateOfBirth: ['1988-08-15', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     phone: [''],
     address: ['', Validators.required],
     city: ['', Validators.required],
     state: ['Select State', [Validators.required, Validators.minLength(2), Validators.maxLength(2)]],
     zip: ['', Validators.required],
-    ssn: ['', Validators.required],
+    ssn: ['648-32-5442', Validators.required],
     previousCarrier: ['None', Validators.required],
     pastClaims: [false],
     movingViolations: [false],
@@ -60,23 +61,31 @@ export class CustomerFormComponent implements OnInit {
   onToggleClicked() {
     this.isOpen = !this.isOpen;
   }
-
+  
   onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.customerForm.value);
-    console.log(this.quote);
-    // Map the customerForm values to the current quote.
-    Object.assign(this.quote, ...this.customerForm.value);
-    this.addQuote(this.quote);
+    if(!this.isFormUpdating){
+      if(this.quote.id){
+        this.updateQuote();
+      }
+      else{
+        this.addQuote();
+      }
+      this.isFormUpdating = true;
+    }
   }
-
-  addQuote(quote: Quote): void {
-    if(!quote) return;
-    this.quoteService.addQuote(quote)
+  
+  addQuote(): void {
+    Object.assign(this.quote, this.customerForm.value);
+    this.quote.dateQuoted = new Date(Date.now());
+    this.quoteService.addQuote(this.quote)
       .subscribe(quote => {
         this.quote.id = quote.id;
         this.quoteChange.emit(this.quote);
       });    
+  }
+
+  updateQuote(): void {
+    Object.assign(this.quote, this.customerForm.value);
   }
 
   onFormFieldCompleted() {

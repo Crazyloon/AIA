@@ -8,7 +8,8 @@
     <div class="expanding-card-container" [class.open]="isOpen">
   
       <div class="expanding-card-body">
-          <table class="table table-striped table-hover table-responsive">
+        <div *ngIf="_quote.vehicles.length > 0" class="table-responsive">
+          <table class="table table-striped table-hover">
             <thead class="thead-brand">
               <tr>
                 <th>Driver</th>
@@ -30,9 +31,9 @@
                   <td>{{vehicle.make}}</td>
                   <td>{{vehicle.model}}</td>
                   <td>{{vehicle.year}}</td>
-                  <td>{{vehicle.currentValue}}</td>
+                  <td>{{vehicle.currentValue | currency:USD}}</td>
                   <td>{{vehicle.milesToWork}}</td>
-                  <td>{{vehicle.annualMileage}}</td>
+                  <td>{{vehicle.annualMileage | number:'1.0-0'}}</td>
                   <td>{{vehicle.daysDrivenPerWeek}}</td>
                   <td>{{vehicle.vin}}</td>
                   <td>{{vehicle.antiTheft}}</td>
@@ -40,6 +41,7 @@
               </ng-container>
             </tbody> 
           </table>  
+        </div>
         <form [formGroup]="vehicleForm" (ngSubmit)="onSubmit()">
           <div class="form-group">
             <label>Primary Driver</label>
@@ -229,10 +231,10 @@
               Reduced Used Discount?
             </label>
           </div>
-          <button type="submit" class="btn btn-success bevel bevel-md" [disabled]="!vehicleForm.valid">Save Vehicle</button>
-          <div *ngIf="!_quote.id" class="alert alert-danger">
+          <button type="submit" class="btn btn-success bevel bevel-md" [disabled]="!vehicleForm.valid || !_quote.id || isFormUpdating">Save Vehicle</button>
+          <div *ngIf="!_quote.id" class="alert alert-warning">
             <span class="invalid-feedback" style="display: block;">
-              Start by saving customer information.
+                Save customer information before adding a vehicle.
             </span>
           </div>
         </form>

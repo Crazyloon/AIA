@@ -30,7 +30,7 @@ img.icon{
 
 input.form-control.is-invalid, select.form-control.is-invalid, button{
 
-  & ~ div.alert.alert-danger{
+  & ~ div.alert.alert-danger, & ~ div.alert.alert-warning{
     margin: 5px 0 0 0;
     padding: 0 0 0 .75rem;
     z-index: -1;
@@ -45,6 +45,12 @@ input.form-control.is-invalid, select.form-control.is-invalid, button{
 
 div.valid-feedback{
   margin-left: 13px;
+}
+
+.alert.alert-warning{
+  span.invalid-feedback{
+    color: #bda043;
+  }
 }
 
 .thead-brand{

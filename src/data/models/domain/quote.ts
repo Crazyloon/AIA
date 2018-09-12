@@ -28,7 +28,7 @@ export class Quote {
   zip: string;
   ssn: string;
   price: number;
-  dateQuoted: string;
+  dateQuoted: Date;
   sold: boolean;
   dateSold: Date;
   discarded: boolean;
