@@ -31,10 +31,10 @@
                   <td>{{vehicle.make}}</td>
                   <td>{{vehicle.model}}</td>
                   <td>{{vehicle.year}}</td>
-                  <td>{{vehicle.currentValue | currency:USD}}</td>
-                  <td>{{vehicle.milesToWork}}</td>
-                  <td>{{vehicle.annualMileage | number:'1.0-0'}}</td>
-                  <td>{{vehicle.daysDrivenPerWeek}}</td>
+                  <td>{{vehicle.currentValue | currency : 'USD' : 'symbol' : '1.0'}}</td>
+                  <td>{{vehicle.milesToWork}}mi</td>
+                  <td>{{vehicle.annualMileage | number:'1.0-0'}} mi</td>
+                  <td>{{vehicle.daysDrivenPerWeek | pluralize:'day'}}</td>
                   <td>{{vehicle.vin}}</td>
                   <td>{{vehicle.antiTheft}}</td>
                 </tr>

@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'label'
+  name: 'pluralize'
 })
 export class PluralLabelPipe implements PipeTransform {
 

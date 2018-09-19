@@ -16,6 +16,7 @@ import { QuoteSummaryComponent } from './quote-summary/quote-summary.component';
 import { DriverFormComponent } from './driver-form/driver-form.component';
 import { NewQuotePageComponent } from './new-quote-page/new-quote-page.component';
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
+import { PluralLabelPipe } from './pipes/plural-label.pipe';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
     DriverFormComponent,
     NewQuotePageComponent,
     VehicleFormComponent,
+    PluralLabelPipe,
   ],
   imports: [
     BrowserModule,
