@@ -71,9 +71,9 @@ export class QuoteService {
   /** PUT: update the quote on the server */
   updateQuote (quote: Quote): Observable<any> {
     const url = `${this.quotesUrl}/${quote.id}`;
-    return this.http.put(url, quote, httpOptions).pipe(
+    return this.http.put<Quote>(url, quote, httpOptions).pipe(
       tap(_ => this.log(`Quote Service: Quote - ${quote.id} updated!`)),
-      catchError(this.handleError<any>('updateQuote'))
+      catchError(this.handleError<Quote>('updateQuote'))
     );
   }
 

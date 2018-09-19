@@ -18,6 +18,7 @@ export class CustomerFormComponent implements OnInit {
   isFormUpdating = false;
   @Input() quote: Quote;
   @Output() quoteChange = new EventEmitter<Quote>();
+  @Output() driverData = new EventEmitter<any>();
 
   customerForm = this.fb.group({
     firstName: ['', Validators.required],
@@ -73,6 +74,15 @@ export class CustomerFormComponent implements OnInit {
       this.isFormUpdating = true;
     }
   }
+
+  onCopyToDriver() {
+    this.driverData.emit({
+      'firstName': this.customerForm.get('firstName').value,
+      'lastName': this.customerForm.get('lastName').value,
+      'dateOfBirth': this.customerForm.get('dateOfBirth').value,
+      'ssn': this.customerForm.get('ssn').value
+    });
+  }
   
   addQuote(): void {
     Object.assign(this.quote, this.customerForm.value);
@@ -81,11 +91,17 @@ export class CustomerFormComponent implements OnInit {
       .subscribe(quote => {
         this.quote.id = quote.id;
         this.quoteChange.emit(this.quote);
+        this.isFormUpdating = false;
       });    
   }
 
   updateQuote(): void {
     Object.assign(this.quote, this.customerForm.value);
+    this.quoteService.updateQuote(this.quote)
+      .subscribe(quote => {
+        this.quoteChange.emit(this.quote);
+        this.isFormUpdating = false;
+      })
   }
 
   onFormFieldCompleted() {

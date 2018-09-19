@@ -66,41 +66,41 @@
           padding: 20px;
         }
       }
-      input {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      // input {
+      //   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         
-        &:focus {
-          border-color: $color-trim;
-          box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.25);
-          animation: pulsing_shadow 3s infinite;
-        }
+      //   &:focus {
+      //     border-color: $color-trim;
+      //     box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.25);
+      //     animation: pulsing_shadow 3s infinite;
+      //   }
       
-        &[type="text"], &[type="date"], &[type="email"], &[type="number"] {
-          @media screen and (min-width: map-get($grid-breakpoints, sm)) {
-            max-width: 250px;
-          }
-        }
+      //   &[type="text"], &[type="date"], &[type="email"], &[type="number"] {
+      //     @media screen and (min-width: map-get($grid-breakpoints, sm)) {
+      //       max-width: 250px;
+      //     }
+      //   }
         
-        &[type="checkbox"]{
-          &:focus{
-            border-color: $color-trim;
-            box-shadow: 0 0 8px 0.2rem rgba(0, 11, 106, 0.65);
-          }
-        }
+      //   &[type="checkbox"]{
+      //     &:focus{
+      //       border-color: $color-trim;
+      //       box-shadow: 0 0 8px 0.2rem rgba(0, 11, 106, 0.65);
+      //     }
+      //   }
       
-      }
+      // }
       
-      select {
-        &:focus{
-          border-color: $color-trim;
-          box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.25);
-          animation: pulsing_shadow 3s infinite;
-        }
+      // select {
+      //   &:focus{
+      //     border-color: $color-trim;
+      //     box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.25);
+      //     animation: pulsing_shadow 3s infinite;
+      //   }
         
-        @media screen and (min-width: map-get($grid-breakpoints, sm)) {
-          max-width: 250px;
-        }
-      }
+      //   @media screen and (min-width: map-get($grid-breakpoints, sm)) {
+      //     max-width: 250px;
+      //   }
+      // }
 
       label:not(.check-box-input) {
         display: block;
@@ -179,6 +179,15 @@
           transform: rotate(45deg);
         }
       }
+
+      button {
+        width: 100%
+      }
+      @media screen and (min-width: map-get($grid-breakpoints, sm)) {
+        button {
+          width: auto;
+        }
+      }
     }
 
     .expanding-card-footer {
@@ -217,23 +226,23 @@
   }
 }
 
-div.table-responsive{
-  position: relative;
-  top: -2px;
-  table.table.table-striped{
-    margin-bottom: 0;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-}
+// div.table-responsive{
+//   position: relative;
+//   top: -2px;
+//   table.table.table-striped{
+//     margin-bottom: 0;
+//     overflow-x: auto;
+//     white-space: nowrap;
+//   }
+// }
 
-@-webkit-keyframes pulsing_shadow {
-  0% { box-shadow: 0 0 4px 0.2rem rgba(0, 11, 106, 0.25) }
-  50% { box-shadow: 0 0 10px 0.2rem rgba(0, 11, 106, 0.65) }
-  100% { box-shadow: 0 0 4px 0.2rem rgba(0, 11, 106, 0.25) }
-}
-@keyframes pulsing_shadow {
-  0% { box-shadow: 0 0 4px 0.2rem rgba(0, 11, 106, 0.25) }
-  50% { box-shadow: 0 0 10px 0.2rem rgba(0, 11, 106, 0.65) }
-  100% { box-shadow: 0 0 4px 0.2rem rgba(0, 11, 106, 0.25) }
-}
+// @-webkit-keyframes pulsing_shadow {
+//   0% { box-shadow: 0 0 4px 0.2rem rgba(0, 11, 106, 0.25) }
+//   50% { box-shadow: 0 0 10px 0.2rem rgba(0, 11, 106, 0.65) }
+//   100% { box-shadow: 0 0 4px 0.2rem rgba(0, 11, 106, 0.25) }
+// }
+// @keyframes pulsing_shadow {
+//   0% { box-shadow: 0 0 4px 0.2rem rgba(0, 11, 106, 0.25) }
+//   50% { box-shadow: 0 0 10px 0.2rem rgba(0, 11, 106, 0.65) }
+//   100% { box-shadow: 0 0 4px 0.2rem rgba(0, 11, 106, 0.25) }
+// }

@@ -16,6 +16,21 @@ export class DriverFormComponent implements OnInit {
   isFormUpdating = false;
   driver: Driver;
   @Input() quote: Quote;
+  @Input() 
+  set driverData(driverData: any) {
+    if(driverData) {
+      this.driverForm.setValue({
+        'firstName': driverData['firstName'],
+        'lastName': driverData['lastName'],
+        'dateOfBirth': driverData['dateOfBirth'],
+        'ssn': driverData['ssn'],
+        'licenseNumber': this.driverForm.get('licenseNumber').value,
+        'issuingState': this.driverForm.get('issuingState').value,
+        'safeDrivingSchool': this.driverForm.get('safeDrivingSchool').value,
+        'under23YearsOld': this.driverForm.get('under23YearsOld').value,
+      });
+    }
+  }
   @Output() quoteChange = new EventEmitter<Quote>();
 
   driverForm = this.fb.group({

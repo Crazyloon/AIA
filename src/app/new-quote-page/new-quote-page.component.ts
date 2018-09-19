@@ -10,6 +10,7 @@ export class NewQuotePageComponent implements OnInit {
   public quote: Quote;
   public driverSelection: {id: number, name: string};
   public driverOptions: {id: number, name: string}[] = [];
+  public driverData: {};
 
   constructor() { }
 
@@ -19,8 +20,11 @@ export class NewQuotePageComponent implements OnInit {
     this.quote.vehicles = [];
   }
 
-  onQuoteUpdated(quote: Quote){
+  onQuoteUpdated(quote: Quote) {
     this.quote = Object.assign(new Quote(), quote);
   }
 
+  onCustomerIsDriver(driverData: any) {
+    this.driverData = Object.assign({}, driverData);
+  }
 }

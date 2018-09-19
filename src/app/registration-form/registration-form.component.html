@@ -1,0 +1,50 @@
+<div class="registration-body">
+  <div class="registration-form">
+    <h2>Register</h2>
+    <div class="registration-form-group">
+        <div class="img-wrapper">
+          <img src="../../assets/icons/006-user.svg">
+        </div>
+        <div class="form-group">
+          <label>First Name</label>
+          <input class="form-control"
+            [class.is-valid]="firstName.valid"
+            [class.is-invalid]="firstName.invalid && (firstName.dirty || firstName.touched)" 
+            formControlName="firstName"
+            type="text"
+            required 
+          />
+        </div>
+    </div>
+    <div class="registration-form-group">
+      <div class="img-wrapper">
+        <img src="../../assets/icons/006-user.svg">
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input class="form-control"
+          [class.is-valid]="lastName.valid"
+          [class.is-invalid]="lastName.invalid && (lastName.dirty || lastName.touched)" 
+          formControlName="lastName"
+          type="text"
+          required 
+        />
+      </div>
+    </div>
+    <div class="registration-form-group">
+      <div class="img-wrapper">
+        <img src="../../assets/icons/026-closed-envelope.svg">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input class="form-control"
+          [class.is-valid]="email.valid"
+          [class.is-invalid]="email.invalid && (email.dirty || email.touched)" 
+          formControlName="email"
+          type="text"
+          required 
+        />
+      </div>
+    </div>
+  </div>
+</div>

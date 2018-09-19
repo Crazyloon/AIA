@@ -1,0 +1,33 @@
+.registration-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #777777;
+  box-shadow: 2px 2px 5px 0 #777777;
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  h2{
+    margin: 1rem auto 1.5rem auto;
+  }
+
+  .registration-form-group{
+    display: flex;
+  }
+  .form-group{
+    width: 100%;
+  }
+  .img-wrapper{
+    position: relative;
+    margin-right: 5px;
+    img {
+      position: relative;
+      bottom: -37px;
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
