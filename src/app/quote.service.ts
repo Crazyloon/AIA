@@ -3,7 +3,7 @@ import { Quote } from '../data/models/domain/quote';
 import { Observable, of } from 'rxjs';
 import { MessageService } from './message.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap, take } from 'rxjs/operators';
+import { catchError, map, tap, take, filter } from 'rxjs/operators';
 import { Driver } from '../data/models/domain/driver';
 import { Vehicle } from '../data/models/domain/vehicle';
 
@@ -34,12 +34,23 @@ export class QuoteService {
     this.messageService.add(`QuoteService: ${message}`);
   }
 
-  getQuotes(): Observable<Quote[]> {
-    return this.http.get<Quote[]>('api/quotes')
-    .pipe(
-      tap(quotes => this.log('Quote Service: got quotes!')),
-      catchError(this.handleError('getQuotes', []))
-    );
+  getQuotes(filters?: any): Observable<Quote[]> {
+    //if(!filters){
+      return this.http.get<Quote[]>(this.quotesUrl)
+      .pipe(
+        tap(quotes => this.log('Quote Service: got quotes!')),
+        catchError(this.handleError('getQuotes', []))
+      );
+    //}
+    // const { lessThan, greaterThan, quoteId, dateStart, dateEnd, fName, lName, phone, email, city, state, zip } = filters;
+    // return this.http.get<Quote[]>(this.quotesUrl)
+    //   .pipe(
+    //     filter((quote: Quote) => city? quote.city.toLowerCase() == city.toLowerCase() : true),
+    //     filter((quote: Quote) => state? quote.state.toLowerCase() == state.toLowerCase() : true),
+    //     // Should I really add a filter for each option in filters, or is there a better way?
+    //     catchError(this.handleError('getQuotes', []))
+    //   );
+
   }
   /** GET quote by id. Will 404 if id not found */
   getQuote(id: number): Observable<Quote> {

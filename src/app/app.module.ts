@@ -18,6 +18,11 @@ import { NewQuotePageComponent } from './new-quote-page/new-quote-page.component
 import { VehicleFormComponent } from './vehicle-form/vehicle-form.component';
 import { PluralLabelPipe } from './pipes/plural-label.pipe';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
+import { LoginFormComponent } from './login-form/login-form.component';
+import { MetricsCardComponent } from './metrics-card/metrics-card.component';
+import { MetricsPageComponent } from './metrics-page/metrics-page.component';
+import { FilterOptionComponent } from './filter-option/filter-option.component';
+import { SearchResultsPageComponent } from './search-results-page/search-results-page.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +38,11 @@ import { RegistrationFormComponent } from './registration-form/registration-form
     VehicleFormComponent,
     PluralLabelPipe,
     RegistrationFormComponent,
+    LoginFormComponent,
+    MetricsCardComponent,
+    MetricsPageComponent,
+    FilterOptionComponent,
+    SearchResultsPageComponent,
   ],
   imports: [
     BrowserModule,

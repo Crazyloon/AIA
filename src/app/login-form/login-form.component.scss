@@ -2,7 +2,7 @@
 @import "node_modules/bootstrap/scss/_variables";
 @import "src/_variables";
 
-.registration-body {
+.login-body {
   display: flex;
   flex-direction: column;
   border: 1px solid #777777;
@@ -11,7 +11,7 @@
   margin: auto;
 }
 
-.registration-form {
+.login-form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,7 +31,7 @@
     }
   }
 
-  .registration-form-group {
+  .login-form-group {
     display: flex;
   }
   .form-group {

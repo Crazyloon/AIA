@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { QuoteService } from '../quote.service';
+import { Quote } from '../../data/models/domain/quote';
 
 @Component({
   selector: 'app-landing-page',
@@ -6,10 +8,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing-page.component.scss']
 })
 export class LandingPageComponent implements OnInit {
-
-  constructor() { }
+  quotes: Quote[];
+  constructor(private quoteService: QuoteService) { }
 
   ngOnInit() {
+    this.getQuotes();
+  }
+
+  getQuotes(): void {
+    this.quoteService.getQuotes()
+      .subscribe(quotes => this.quotes = quotes);
   }
 
 }
