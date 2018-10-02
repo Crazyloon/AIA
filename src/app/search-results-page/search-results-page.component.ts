@@ -6,6 +6,12 @@ import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { isNumber, isDate } from 'util';
 
+interface filterObject {
+  type: string,
+  symbol: string,
+  value: any,
+  func: (quote: Quote, value: any) => boolean
+}
 @Component({
   selector: 'app-search-results-page',
   templateUrl: './search-results-page.component.html',
@@ -13,9 +19,9 @@ import { isNumber, isDate } from 'util';
 })
 export class SearchResultsPageComponent implements OnInit {
   stateOptions: string[] = ["Select State", "AK", "AL", "AR", "AS", "AZ", "CA", "CO", "CT", "DC", "DE", "FL", "GA", "GU", "HI", "IA", "ID", "IL", "IN", "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN", "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ", "NM", "NV", "NY", "OH", "OK", "OR", "PA", "PR", "RI", "SC", "SD", "TN", "TX", "UT", "VA", "VI", "VT", "WA", "WI", "WV", "WY"];
-  _quotes: Quote[];
-  quotes: Quote[];
-  filters: any[];
+  _quotes: Quote[]; // original quote list filled on ngOnInit() - Never Changes
+  quotes: Quote[]; // quote list that gets filtered and displayed - Changes Frequently
+  filters: filterObject[];
   @ViewChild('txtQuoteId') txtQuoteId: ElementRef;
   @ViewChild('dateStart') dateStart: ElementRef;
   @ViewChild('dateEnd') dateEnd: ElementRef;
@@ -42,7 +48,6 @@ export class SearchResultsPageComponent implements OnInit {
 
 
   onRemoveFilterClick(filterType: string){
-    console.log("Filter Type: " + filterType);
     this.filters = this.filters.filter((f: any) => f.type !== filterType);
     switch(filterType){
       case filterTypes.QuoteId:
@@ -143,7 +148,6 @@ export class SearchResultsPageComponent implements OnInit {
     const year = +startDate.substring(0, firstHyphen);
     const month = +startDate.substring(firstHyphen + 1, secondHyphen);
     const day = +startDate.substring(secondHyphen + 1);
-    console.log(`year: ${year} month: ${month} day: ${day}`);
 
     let start = new Date(year, month -1, day);
     const filter = { type: filterTypes.QuotedAfterDate, symbol: '', value: start, func: this.byAfterDate };
