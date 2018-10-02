@@ -1,11 +1,35 @@
-.filter-options-list{
-  :not(:last-child){
+@import "../../variables";
+
+.filter-options-list {
+  :not(:last-child) {
     margin-right: 10px;
   }
 }
 
-div.table-responsive{
+div.table-responsive {
   position: relative;
   top: 0;
   margin-top: 10px;
 }
+
+label {
+  display: block;
+}
+
+.quote-search-section {
+  margin-top: 20px;
+  border: 1px solid $color-primary;
+  padding: 10px;
+}
+
+.customer-search-section {
+  margin-top: 20px;
+  border: 1px solid $color-primary;
+  padding: 10px;
+}
+
+.search{
+  display: flex; 
+  margin: 10px 0;
+  justify-content: flex-end;
+} 

@@ -5,6 +5,7 @@
         <th>Quote ID</th>
         <th>Name</th>
         <th>DoB</th>
+        <th>Price</th>
         <th>Email</th>
         <th>Phone</th>
         <th>City</th>
@@ -23,6 +24,7 @@
           </td>
           <td>{{quote.firstName}} {{quote.lastName}}</td>
           <td>{{quote.dateOfBirth | date}}</td>
+          <td>{{quote.price | currency:USD}}</td>
           <td>{{quote.email}}</td>
           <td>{{quote.phone}}</td>
           <td>{{quote.city}}</td>
