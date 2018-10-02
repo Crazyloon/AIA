@@ -39,9 +39,9 @@ export class SearchResultsPageComponent implements OnInit {
 
   ngOnInit() {
     this.quoteService.getQuotes()
-      .subscribe((filteredQuotes: Quote[]) => {
-        this._quotes = filteredQuotes;
-        this.quotes = filteredQuotes
+      .subscribe((allQuotes: Quote[]) => {
+        this._quotes = allQuotes;
+        this.quotes = allQuotes
       });
       this.filters = [];
   }
