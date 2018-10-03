@@ -1,4 +1,4 @@
-export enum filterTypes{
+export enum FilterType{
   QuoteId = "Quote ID",
   QuotedAfterDate = "After",
   QuotedBeforeDate = "Before",
